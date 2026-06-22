@@ -3,4 +3,5 @@ __pycache__/
 *.pyc
 .token_cache.json
 .token_cache_29443.json
+.claude/
 참고파일/
