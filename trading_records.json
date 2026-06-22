@@ -1,0 +1,34 @@
+[
+  {
+    "timestamp": "2026-06-16 15:30:19",
+    "strategy": "black_scholes_delta_hedge",
+    "ticker": "005930",
+    "spot": 342000,
+    "strike": 342000,
+    "delta": 0.5303,
+    "target_qty": 5,
+    "current_qty": 0,
+    "order_qty": 5,
+    "order_type": "buy",
+    "order_no": "",
+    "order_time": "",
+    "rt_cd": "1",
+    "msg": "모의투자 장종료 입니다."
+  },
+  {
+    "timestamp": "2026-06-17 12:06:53",
+    "strategy": "black_scholes_delta_hedge",
+    "ticker": "005930",
+    "spot": 336750,
+    "strike": 336750,
+    "delta": 0.5303,
+    "target_qty": 5,
+    "current_qty": 0,
+    "order_qty": 5,
+    "order_type": "buy",
+    "order_no": "0000024431",
+    "order_time": "120655",
+    "rt_cd": "0",
+    "msg": "모의투자 매수주문이 완료 되었습니다."
+  }
+]
