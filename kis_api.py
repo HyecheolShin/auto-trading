@@ -183,11 +183,11 @@ def get_holding_qty(access_token, ticker):
 
 
 # ================================================================
-# 2-2. 델타 헤징 (수업의 Black-Scholes 델타 헤징 방식 적용)
+# 2-2. 델타 헤징
 #
 # 005930 콜옵션을 매도(short call)했다고 가정하고, Black-Scholes 델타에
 # 맞춰 기초자산(주식)을 목표 수량만큼 보유하도록 실제 매수/매도 주문을
-# 실행한다. (참고: [7_1]_delta_hedging.ipynb, [8_1]_BlackScholes.ipynb)
+# 실행한다.
 # ================================================================
 def delta_hedge_trade(access_token, ticker="005930", T=30/365, r=0.035,
                        sigma=0.25, contract_qty=10, strike=None):

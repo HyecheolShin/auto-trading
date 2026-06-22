@@ -10,7 +10,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
 # ================================================================
-# GBM 경로 생성  [6_1], [10+11]_review, [12_1]
+# GBM 경로 생성
 # ================================================================
 def generate_brownian(n_paths, n_steps):
     dW = torch.randn(n_paths, n_steps)
@@ -25,7 +25,7 @@ def generate_geometric_brownian(n_paths=2, n_steps=250, sigma=0.2, dt=1/250):
 
 
 # ================================================================
-# Payoff 함수  [12_1]_various_payoffs
+# Payoff 함수
 # ================================================================
 def european_payoff(spot, call=True, strike=1.0):
     if call:
@@ -56,7 +56,7 @@ def american_binary_payoff(spot, call=True, strike=1.0):
 
 
 # ================================================================
-# 1. Black-Scholes  [8_1], [12_1]
+# 1. Black-Scholes
 # ================================================================
 def black_scholes(S, K, T, r, sigma, option_type="call"):
     d1 = (np.log(S / K) + (r + 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
@@ -76,7 +76,7 @@ def black_scholes_delta(S, K, T, r, sigma, option_type="call"):
 
 
 # ================================================================
-# 2. Lookback (Monte Carlo)  [12_1]
+# 2. Lookback (Monte Carlo)
 # ================================================================
 def simulate_gbm(S0, T, r, sigma, M, I):
     dt = T / M
@@ -105,7 +105,7 @@ def lookback_option_monte_carlo(S0, K, T, r, sigma, M=50, I=10000,
 
 
 # ================================================================
-# 3. European Binary  [12_1]
+# 3. European Binary
 # ================================================================
 def european_binary_option(S, K, T, r, sigma, option_type="call"):
     d2 = (np.log(S / K) + (r - 0.5 * sigma**2) * T) / (sigma * np.sqrt(T))
@@ -116,7 +116,7 @@ def european_binary_option(S, K, T, r, sigma, option_type="call"):
 
 
 # ================================================================
-# 4. American Binary (Monte Carlo)  [12_1]
+# 4. American Binary (Monte Carlo)
 # ================================================================
 def american_binary_option_monte_carlo(S0, K, T, r, sigma, M=50, I=10000,
                                         option_type="call", payout=1.0):
@@ -133,7 +133,7 @@ def american_binary_option_monte_carlo(S0, K, T, r, sigma, M=50, I=10000,
 
 
 # ================================================================
-# P&L 계산  [9_2]_prev_hedge, [10+11]_review, [12_1]
+# P&L 계산
 # ================================================================
 def pl(spot, unit, cost=None, payoff=None):
     output = unit[..., :-1].mul(spot.diff(dim=-1)).sum(dim=(-2, -1))
@@ -146,14 +146,14 @@ def pl(spot, unit, cost=None, payoff=None):
 
 
 # ================================================================
-# 리스크 측도  [9_1_5]_entropic_risk_measure, [9_1], [10+11]_review, [12_1]
+# 리스크 측도
 # ================================================================
 def entropic_risk_measure(x, a=1.0):
     return (torch.logsumexp(-x * a, dim=0) - math.log(x.size(0))) / a
 
 
 # ================================================================
-# Feature 함수  [10+11]_review, [12_1]
+# Feature 함수
 # ================================================================
 def time_to_maturity(spot, dt):
     n_paths, _, n_steps = spot.size()
@@ -174,7 +174,7 @@ def volatility(spot, vol):
 
 
 # ================================================================
-# Dataset  [8_1], [9_1], [10+11]_review, [12_1]
+# Dataset
 # ================================================================
 class MyDataset(Dataset):
     def __init__(self, data):
@@ -188,7 +188,7 @@ class MyDataset(Dataset):
 
 
 # ================================================================
-# Deep Hedging 모델 (MLP + prev_hedge)  [9_2]_prev_hedge, [12_1]
+# Deep Hedging 모델 (MLP + prev_hedge)
 # ================================================================
 class MLP(nn.Module):
     def __init__(self, n_inputs):
@@ -215,7 +215,7 @@ class MLP(nn.Module):
 
 
 # ================================================================
-# 헤징 계산 유틸리티  [8_1], [9_1], [10+11]_review, [12_1]
+# 헤징 계산 유틸리티
 # ================================================================
 def compute_hedge(model, ds):
     outputs = []
@@ -230,7 +230,7 @@ def compute_portfolio(model, ds, spot, payoff=None):
 
 
 # ================================================================
-# Deep Hedging 학습  [9_1]_loss_function, [9_2]_prev_hedge
+# Deep Hedging 학습
 # ================================================================
 def fit(model, ds, spot, payoff, n_epochs=200):
     optimizer = torch.optim.Adam(model.parameters())
